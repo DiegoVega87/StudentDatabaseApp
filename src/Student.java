@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Student {
@@ -48,8 +49,40 @@ public class Student {
         IDs.add(ID);
         System.out.println(ID);
         return ID;
-
     }
+
+    public boolean enroll(){
+        Scanner in = new Scanner(System.in);
+        String option = "";
+        System.out.println("""
+                Please choose:\s
+                1 - History 101
+                2 - Mathematics 101
+                3 - English 101
+                4 - Chemistry 101
+                5 - Computer Science 101""");
+        switch (in.nextInt()){
+            case 1 -> option = "History 101";
+            case 2 -> option = "Mathematics 101";
+            case 3 -> option = "English 101";
+            case 4 -> option = "Chemistry 101";
+            case 5 -> option = "Computer Science 101";
+            default -> {System.out.println("Invalid option, please choose from 1-5.");
+            return false;}
+
+        }
+        if(courses.size() == 5){
+            System.out.println("ERROR: Student reached max number of courses/term");
+        }else if(courses.contains(option)){
+            System.out.println("ERROR: Student already enrolled for " + option);
+        }else{
+            System.out.println("Enrollment successful!");
+            balance += 600;
+            return courses.add(option);
+        }
+        return false;
+    }
+
 
 
 }
