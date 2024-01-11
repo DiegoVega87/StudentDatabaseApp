@@ -87,5 +87,18 @@ public class Student {
         return balance;
     }
 
+    public boolean payTuition(int amount){
+        if(amount < balance/2){
+            System.out.println("Payment not processed. Payment must be greater than " + balance/2 + "\n");
+        }else if(amount > balance){
+            System.out.println("Payment not processed. Payment must be less than or equal to " + balance + "\n");
+        }else{
+            balance -= amount;
+            System.out.println("Your balance is: " + balance);
+            return true;
+        }
+        return false;
+    }
+
 
 }
