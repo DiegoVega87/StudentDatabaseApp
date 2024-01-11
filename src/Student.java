@@ -83,6 +83,9 @@ public class Student {
         return false;
     }
 
+    public int getBalance(){
+        return balance;
+    }
 
 
 }
