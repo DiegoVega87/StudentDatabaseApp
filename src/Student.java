@@ -13,23 +13,21 @@ public class Student {
     private int balance;
 
     private ArrayList<String> courses;
-    private Set<String> IDs;
 
-    public Student(String firstName, String lastName, String year) {
+    public Student(String firstName, String lastName, String year, Set<String> IDs) {
 
 
         courses = new ArrayList<>();
-        IDs = new HashSet<>();
         this.firstName = firstName;
         this.lastName = lastName;
         this.year = year;
         status = "Not enrolled";
         balance = 0;
-        ID = generateID(year);
+        ID = generateID(year, IDs);
 
     }
 
-    private String generateID(String year) {
+    private String generateID(String year, Set<String> IDs) {
 
         String first = "";
 
@@ -51,7 +49,7 @@ public class Student {
         return ID;
     }
 
-    public boolean enroll(){
+    public boolean addCourse(){
         Scanner in = new Scanner(System.in);
         String option = "";
         System.out.println("""
@@ -76,6 +74,9 @@ public class Student {
         }else if(courses.contains(option)){
             System.out.println("ERROR: Student already enrolled for " + option);
         }else{
+            if(status.equals("Not enrolled")){
+                status = "Enrolled";
+            }
             System.out.println("Enrollment successful!");
             balance += 600;
             return courses.add(option);
@@ -100,5 +101,15 @@ public class Student {
         return false;
     }
 
+    public void showInfo(){
+        System.out.println("Student ID:" + ID);
+        System.out.println("First Name: " + firstName + "\nLast Name: " + lastName);
+        System.out.println("Status: " + status);
+        System.out.println("Courses: ");
+        for(String s : courses){
+            System.out.println(s);
+        }
+        System.out.println("Balance: " + balance);
+    }
 
 }
