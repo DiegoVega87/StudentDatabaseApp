@@ -7,46 +7,60 @@ public class Student {
 
     private String firstName;
     private String lastName;
-    private String year;
+    private int gradeYear;
     private String status;
-    private String ID;
+    private String studentID;
     private int balance;
+    private static final int COURSE_COST = 600;
+    private static int id = 1000;
 
     private ArrayList<String> courses;
 
-    public Student(String firstName, String lastName, String year, Set<String> IDs) {
 
+    public Student() {
 
-        courses = new ArrayList<>();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.year = year;
-        status = "Not enrolled";
-        balance = 0;
-        ID = generateID(year, IDs);
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the number of students to add to the database: ");
+        int numStudents = input.nextInt();
+        input.nextLine();
+        while(numStudents > 0) {
+            System.out.println("Please Enter student's First Name: ");
+            this.firstName = input.nextLine();
+            System.out.println("Please Enter student's Last Name: ");
+            this.lastName = input.nextLine();
+            System.out.println("""
+                    Please enter Student's year:\s
+                    1 - Freshman
+                    2 - Sophomore\s
+                    3 - Junior\s
+                    4 - Senior""");
+            this.gradeYear = input.nextInt();
+            input.nextLine();
+
+            while ((this.gradeYear != 1) &&
+                    (this.gradeYear != 2) &&
+                    (this.gradeYear != 3) &&
+                    (this.gradeYear != 4)) {
+                System.out.println("""
+                    ERROR: Please enter a valid year: \s
+                    1 - Freshman
+                    2 - Sophomore\s
+                    3 - Junior\s
+                    4 - Senior
+                    """);
+
+                this.gradeYear = input.nextInt();
+            }
+            numStudents--;
+        }
+        setStudentID();
+        System.out.println(firstName + " " + lastName + " " + gradeYear + " " + studentID);
 
     }
 
-    private String generateID(String year, Set<String> IDs) {
-
-        String first = "";
-
-        switch (year.toLowerCase()) {
-            case "freshman" -> first = "1";
-            case "sophomore" -> first = "2";
-            case "junior" -> first = "3";
-            case "senior" -> first = "4";
-        }
-
-        int number = (int) (Math.random() * 10000);
-        ID = first + String.format("%04d", number);
-        while(IDs.contains(ID)) {
-            number = (int)(Math.random() * 10000);
-            ID = first + String.format("%04d", number);
-        }
-        IDs.add(ID);
-        System.out.println(ID);
-        return ID;
+    private void setStudentID() {
+        id++;
+        this.studentID = gradeYear + "" +  id;
     }
 
     public boolean addCourse(){
@@ -78,7 +92,7 @@ public class Student {
                 status = "Enrolled";
             }
             System.out.println("Enrollment successful!");
-            balance += 600;
+            balance += COURSE_COST;
             return courses.add(option);
         }
         return false;
@@ -102,7 +116,7 @@ public class Student {
     }
 
     public void showInfo(){
-        System.out.println("Student ID:" + ID);
+        System.out.println("Student StudentID:" + studentID);
         System.out.println("First Name: " + firstName + "\nLast Name: " + lastName);
         System.out.println("Status: " + status);
         System.out.println("Courses: ");
