@@ -1,7 +1,7 @@
 # Student Database Application
 ## The application should do:
 - Prompt the user for the number of students to add to the database.
-- Prompt the user for the student's name and year (freshman, sophomore, junior, senior).
+- Prompt the user for the student's name and year (Freshman, Sophomore, Junior, Senior).
 - The app will automatically generate a 5-digit unique ID, with its first number corresponding to the student's grade level.
 - The students can enroll in the following courses:
   - History 101
